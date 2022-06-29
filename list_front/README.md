@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### After creating: 
+    – package.json contains 4 main modules: react, react-router-dom, axios & bootstrap.
+– App is the container that has Router & navbar.
+– There are 3 components: TutorialsList, List, AddTutorial.
+– http-common.js initializes axios with HTTP base Url and headers.
+– ListDataService has methods for sending HTTP requests to the Apis.
+– .env configures port for this React CRUD App.
+
+
