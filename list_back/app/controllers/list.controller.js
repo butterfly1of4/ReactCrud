@@ -1,31 +1,112 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const List = db.lists;
 const Op = db.Sequelize.Op;
-// Create and Save a new Tutorial
+// Create and Save a new List
 exports.create = (req, res) => {
-  
+  //Validate request
+  if(!req.body.title){
+    res.status(400).send({
+        message: "Content cannot be empty"
+    })
+    return
+  }
+  //Create a List
+  const list = {
+  title: req.body.title,
+  description: req.body.description,
+  published: req.body.published ? req.body.published : false
+}
+//Save List in the database
+List.create(list)
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err =>{
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the list"
+        })
+    })
 };
-// Retrieve all Tutorials from the database.
+// Retrieve all Lists from the database.
 exports.findAll = (req, res) => {
-  
+  const title = req.query.title;
+  let condition = title ? {title: {[OP.iLike]: `%${title}`}}: null
+  List.findAll({where:condition})
+    .then(data => {
+        res.send(data)
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+            err.message || "Some error occurred."
+        })
+    })
+//We use req.query.title to get query string from the Request and consider it as condition for findAll() method.
 };
-// Find a single Tutorial with an id
+// Find a single List with an id
 exports.findOne = (req, res) => {
+    const id = req.params.id;
+    List.findByPk(id)
+        .then(data => {
+            if(data){
+                res.send(data)
+            }else {
+                res.status(404).send({
+                    message: "Error finding list id = " + id
+                })
+            }
+        })
   
 };
-// Update a Tutorial by the id in the request
+// Update a List by the id in the request
 exports.update = (req, res) => {
-  
+  const id = req.params.id
+  List.update(req.body, {
+    where: {id: id}
+  })
+  .then(num => {
+    if(num == 1){
+        res.send({
+            message: "List was updated successfully"
+        })
+    } else {
+        res.send({
+            message: "Cannot update List id=${id}"
+        })
+    }
+  }).catch(err => {
+    res.status(500).send({
+        message: "Error updating list id = " + id
+    })
+  })
 };
-// Delete a Tutorial with the specified id in the request
+// Delete a List with the specified id in the request
 exports.delete = (req, res) => {
-  
+  const id = req.params.id
+  List.destroy({
+    where: {id: id}
+  })
+  .then(num => {
+   if (num ==1){ 
+        res.send({
+        message: "List deleted."
+    })
+    } else {
+    res.send({
+        message: "Could not delete list id = "+ id
+    })
+    }
+  }).catch(err = {
+    res.status(500).send({
+        message:"Cannot delete List id = "+id
+    })
+  })
 };
-// Delete all Tutorials from the database.
+// Delete all Lists from the database.
 exports.deleteAll = (req, res) => {
   
 };
-// Find all published Tutorials
+// Find all published Lists
 exports.findAllPublished = (req, res) => {
   
 }
