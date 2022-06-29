@@ -5,7 +5,15 @@ const bodyParser = require("body-parser");
 //body-parser helps to parse the request and create the req.body object
 const cors = require("cors");
 //cors provides Express middleware to enable CORS with various options.
+
+//sync call for sequilize/postgresql
 const app = express();
+const db = require("./app/models");
+db.sequelize.sync();
+//if database exits: 
+/*db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});*/
 var corsOptions = {
   origin: "http://localhost:8081"
 };
