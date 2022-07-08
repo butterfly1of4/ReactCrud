@@ -35,6 +35,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to the Disappearing List App." });
 });
 // set port, listen for requests
+//We also need to include routes
+require("./app/routes/list.routes")(app)
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);

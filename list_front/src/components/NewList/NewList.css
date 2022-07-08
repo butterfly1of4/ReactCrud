@@ -1,0 +1,12 @@
+#table {
+    display: flex;
+    justify-content: center;
+    padding: 5%;
+    flex-direction: column;
+}
+
+
+#set_times, #list_name, #task {
+    display: flex;
+    flex-direction: row;
+}

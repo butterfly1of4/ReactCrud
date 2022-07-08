@@ -96,17 +96,38 @@ exports.delete = (req, res) => {
         message: "Could not delete list id = "+ id
     })
     }
-  }).catch(err = {
+  }).catch(err => {
     res.status(500).send({
         message:"Cannot delete List id = "+id
     })
   })
-};
+}
 // Delete all Lists from the database.
 exports.deleteAll = (req, res) => {
-  
+  List.destroy({
+    where: {},
+    truncate: false
+  })
+    .then(nums => {
+        res.send({message: `${nums} All lists deleted` })
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+                err.message || "An error occurred"
+        })
+    })
 };
-// Find all published Lists
+// Find all published Lists with published= true.
 exports.findAllPublished = (req, res) => {
-  
+  List.findAll({wherre: {published:true}})
+  .then(data => {
+    res.send(data)
+  })
+  .catch(err => {
+    res.status(500).send({
+        message:
+        err.message || "Some error occured in retrieval"
+    })
+  })
 }

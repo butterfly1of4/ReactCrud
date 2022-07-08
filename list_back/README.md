@@ -25,7 +25,7 @@ delete
 deleteAll
 findAllPublished
 ```
-
+5. touch list.routes.js in 'app/routes'
 
 
 

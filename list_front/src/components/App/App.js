@@ -12,6 +12,7 @@ import NewUser from '../NewUser/NewUser'
 import NewList from '../NewList/NewList'
 import SignIn from '../SignIn/SignIn'
 import Home from '../Home/Home'
+import CalendarView from "../CalendarView/CalendarView";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
     <Nav.Item>
       <Nav.Link as={Link} to="/newlist">New List</Nav.Link>
     </Nav.Item>
+    <Nav.Item>
+      <Nav.Link as={Link} to="/calview">Calendar View</Nav.Link>
+    </Nav.Item>
   </Nav>
 </>
     <main>
@@ -39,6 +43,8 @@ function App() {
           <Route exact path="/signin" element={<SignIn />} />
           <Route exact path="/newuser" element={<NewUser />}/>
           <Route exact path="/newlist" element={<NewList />} />
+          <Route exact path="/calview" element={<CalendarView />} />
+
 
       </Routes>
     </main>

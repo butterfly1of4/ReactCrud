@@ -1,0 +1,26 @@
+
+.col,.col-1,.col-2 {
+    box-sizing: border-box;
+    border: 1px solid black;
+    flex-direction: row;
+}
+
+.row, .row-12 {
+
+    border: 1px solid red;
+}
+
+
+
+#cal {
+     /* display: flex;
+     justify-content: center;
+     align-items: center; */
+     max-width: 70vw;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+#time_block {
+    
+}
